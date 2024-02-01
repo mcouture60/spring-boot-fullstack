@@ -45,8 +45,8 @@ class CustomerServiceTest {
                 id,
                 "Alex",
                 "alex@gmail.com",
-                19
-        );
+                19,
+                Gender.MALE);
 
         when(customerDao.selectCustomerById(id)).thenReturn(Optional.of(customer));
 
@@ -82,7 +82,8 @@ class CustomerServiceTest {
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
                 "Alex",
                 email,
-                19
+                19,
+                Gender.MALE
         );
 
         // When
@@ -112,7 +113,8 @@ class CustomerServiceTest {
         CustomerRegistrationRequest request = new CustomerRegistrationRequest(
                 "Alex",
                 email,
-                19
+                19,
+                Gender.MALE
         );
 
         // When
@@ -162,8 +164,8 @@ class CustomerServiceTest {
                 customerId,
                 "Alex",
                 "alex@gmail.com",
-                18
-        );
+                18,
+                Gender.MALE);
 
         when(customerDao.selectCustomerById(customerId)).thenReturn(Optional.of(customer));
 
@@ -201,8 +203,8 @@ class CustomerServiceTest {
                 customerId,
                 "Alex",
                 "alex@gmail.com",
-                18
-        );
+                18,
+                Gender.MALE);
 
         when(customerDao.selectCustomerById(customerId)).thenReturn(Optional.of(customer));
 
@@ -237,8 +239,8 @@ class CustomerServiceTest {
                 customerId,
                 "Alex",
                 "alex@gmail.com",
-                18
-        );
+                18,
+                Gender.MALE);
 
         when(customerDao.selectCustomerById(customerId)).thenReturn(Optional.of(customer));
 
@@ -274,8 +276,8 @@ class CustomerServiceTest {
                 customerId,
                 "Alex",
                 "alex@gmail.com",
-                18
-        );
+                18,
+                Gender.MALE);
 
         when(customerDao.selectCustomerById(customerId)).thenReturn(Optional.of(customer));
 
@@ -331,8 +333,8 @@ class CustomerServiceTest {
                 customerId,
                 "Alex",
                 "alex@gmail.com",
-                18
-        );
+                18,
+                Gender.MALE);
         CustomerUpdateRequest customerUpdateRequest = new CustomerUpdateRequest(
                 "Alex",
                 duplicateEmail,
@@ -359,8 +361,8 @@ class CustomerServiceTest {
                 customerId,
                 "Alex",
                 "alex@gmail.com",
-                18
-        );
+                18,
+                Gender.MALE);
         CustomerUpdateRequest customerUpdateRequest = new CustomerUpdateRequest(
                 customer.getName(),
                 customer.getEmail(),
