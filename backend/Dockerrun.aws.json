@@ -3,7 +3,7 @@
   "containerDefinitions": [
     {
       "name": "mcouture-pi",
-      "image": "mcouture11/spring-boot-example:30.01.2024.12.33.45",
+      "image": "mcouture11/spring-boot-example:30.01.2024.15.10.22",
       "essential": true,
       "memory": 512,
       "portMappings": [
