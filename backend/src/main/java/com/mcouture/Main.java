@@ -35,10 +35,11 @@ public class Main {
             String lastName = name.lastName();
             int age = random.nextInt(16, 99);
             Gender gender = age % 2 == 0 ? Gender.MALE : Gender.FEMALE;
+            String email = firstName.toLowerCase() + "." + lastName.toLowerCase() + "@amigoscode.com";
             Customer customer = new Customer(
                     firstName + StringUtils.SPACE + lastName,
-                    firstName.toLowerCase() + "." + lastName.toLowerCase() + "@amigoscode.com",
-                    passwordEncoder.encode(UUID.randomUUID().toString()),
+                    email,
+                    passwordEncoder.encode("password"),
                     age,
                     gender);
             customerRepository.save(customer);
