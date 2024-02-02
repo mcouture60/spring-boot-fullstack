@@ -3,7 +3,7 @@
   "containerDefinitions": [
     {
       "name": "mcouture-api",
-      "image": "mcouture11/spring-boot-example:01.02.2024.09.34.42",
+      "image": "mcouture11/spring-boot-example:02.02.2024.10.26.56",
       "essential": true,
       "memory": 512,
       "portMappings": [
