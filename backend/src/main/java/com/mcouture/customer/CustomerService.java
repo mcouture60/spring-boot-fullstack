@@ -4,6 +4,7 @@ import com.mcouture.exception.DuplicateResourceException;
 import com.mcouture.exception.RequestValidationException;
 import com.mcouture.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,18 +13,28 @@ import java.util.List;
 public class CustomerService {
 
     private final CustomerDao customerDao;
+    private final PasswordEncoder passwordEncoder;
+    private final CustomerDTOMapper customerDTOMapper;
 
-    public CustomerService(@Qualifier("jdbc") CustomerDao customerDao) {
+    public CustomerService(@Qualifier("jdbc") CustomerDao customerDao,
+                           PasswordEncoder passwordEncoder,
+                           CustomerDTOMapper customerDTOMapper) {
         this.customerDao = customerDao;
+        this.passwordEncoder = passwordEncoder;
+        this.customerDTOMapper = customerDTOMapper;
     }
 
-    public List<Customer> getAllCustomers(){
-        return customerDao.selectAllCustomers();
+    public List<CustomerDTO> getAllCustomers(){
+        return customerDao.selectAllCustomers()
+                .stream()
+                .map(customerDTOMapper)
+                .toList();
     }
 
-    public Customer getCustomer(Long id){
+    public CustomerDTO getCustomer(Long id){
         return customerDao
                 .selectCustomerById(id)
+                .map(customerDTOMapper)
                 .orElseThrow(
                         () -> new ResourceNotFoundException(
                                 "customer with [%s] not found".formatted(id)
@@ -42,6 +53,7 @@ public class CustomerService {
         Customer customer = new Customer(
                 customerRegistrationRequest.name(),
                 email,
+                passwordEncoder.encode(customerRegistrationRequest.password()),
                 customerRegistrationRequest.age(),
                 customerRegistrationRequest.gender());
         customerDao.insertCustomer(customer);
@@ -60,7 +72,13 @@ public class CustomerService {
     public void updateCustomer(
             Long customerId,
             CustomerUpdateRequest customerUpdateRequest){
-        Customer customer = getCustomer(customerId);
+        Customer customer = customerDao
+                .selectCustomerById(customerId)
+                .orElseThrow(
+                        () -> new ResourceNotFoundException(
+                                "customer with [%s] not found".formatted(customerId)
+                        )
+                );
 
         boolean changes = false;
 

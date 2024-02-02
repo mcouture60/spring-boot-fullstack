@@ -18,12 +18,14 @@ public class CustomerListDataAccessService implements CustomerDao {
                 1L,
                 "Marc",
                 "marc@gmail.com",
+                "password",
                 34,
                 Gender.MALE);
         Customer jamila = new Customer(
                 2L,
                 "Jamila",
                 "jamila@gmail.com",
+                "password",
                 24,
                 Gender.MALE);
         customers.add(marc);
@@ -70,5 +72,13 @@ public class CustomerListDataAccessService implements CustomerDao {
     @Override
     public void updateCustomer(Customer update) {
         customers.add(update);
+    }
+
+    @Override
+    public Optional<Customer> selectUserByEmail(String email) {
+        return customers
+                .stream()
+                .filter(c -> c.getUsername().equals(email))
+                .findFirst();
     }
 }
