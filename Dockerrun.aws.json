@@ -21,7 +21,7 @@
     },
     {
       "name": "mcouture-react",
-      "image": "mcouture11/mcouture-react:01.02.2024.15.48.45",
+      "image": "mcouture11/mcouture-react:02.02.2024.16.56.30",
       "essential": true,
       "memory": 256,
       "portMappings": [
