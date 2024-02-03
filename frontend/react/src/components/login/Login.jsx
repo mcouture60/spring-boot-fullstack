@@ -139,7 +139,7 @@ const Login = () => {
                     mb={5}
                 >
                     <Link href={"https://amigoscode.com/courses"}>
-                        Enrol Now
+                        Enroll Now
                     </Link>
                 </Text>
                 <Image
