@@ -17,8 +17,13 @@ import {ButtonModule} from "primeng/button";
 import {RippleModule} from "primeng/ripple";
 import {MenuModule} from "primeng/menu";
 import {SidebarModule} from "primeng/sidebar";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {MessageModule} from "primeng/message";
+import {HttpInterceptorService} from "./services/interceptor/http-interceptor.service";
+import {CustomerCardComponent} from "./components/customer-card/customer-card.component";
+import {ToastModule} from "primeng/toast";
+import {ConfirmationService, MessageService} from "primeng/api";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
 
 @NgModule({
   declarations: [
@@ -42,9 +47,20 @@ import {MessageModule} from "primeng/message";
     MenuModule,
     SidebarModule,
     HttpClientModule,
-    MessageModule
+    MessageModule,
+    CustomerCardComponent,
+    ToastModule,
+    ConfirmDialogModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true
+    },
+    MessageService,
+    ConfirmationService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
